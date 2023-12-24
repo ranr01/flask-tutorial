@@ -1,0 +1,7 @@
+name: /home/ranr/Projects/flask_tutorial/.conda
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - flask
+prefix: /home/ranr/Projects/flask_tutorial/.conda
