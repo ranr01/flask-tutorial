@@ -39,3 +39,19 @@ def init_db_command():
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+
+def get_user_from_db_by_username(username, db):
+    user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+    
+    return user
+
+
+def get_user_from_db_by_user_id(user_id, db):
+    user = db.execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
+    
+    return user
