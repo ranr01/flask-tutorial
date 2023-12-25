@@ -55,3 +55,47 @@ def get_user_from_db_by_user_id(user_id, db):
         ).fetchone()
     
     return user
+
+
+def get_all_posts(db):
+    posts = db.execute(
+        'SELECT p.id, title, body, created, author_id, username'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' ORDER BY created DESC'
+    ).fetchall()
+
+    return posts
+
+
+def add_post_to_db(title, body, author_id, db):
+    db.execute(
+                'INSERT INTO post (title, body, author_id)'
+                ' VALUES (?, ?, ?)',
+                (title, body, author_id)
+            )
+    db.commit()
+
+
+def get_post_from_db(id, db):
+    post = db.execute(
+        'SELECT p.id, title, body, created, author_id, username'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' WHERE p.id = ?',
+        (id,)
+    ).fetchone()
+
+    return post
+
+
+def update_post_in_db(id, title, body, db):
+    db.execute(
+                'UPDATE post SET title = ?, body = ?'
+                ' WHERE id = ?',
+                (title, body, id)
+            )
+    db.commit()
+
+
+def delete_post_from_db(id, db):
+    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.commit()
