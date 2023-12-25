@@ -99,3 +99,8 @@ def update_post_in_db(id, title, body, db):
 def delete_post_from_db(id, db):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
+
+
+def get_n_posts_from_db(db):
+    count = db.execute('SELECT COUNT(id) FROM post').fetchone()[0]
+    return count

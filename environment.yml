@@ -4,4 +4,6 @@ channels:
 dependencies:
   - python=3.12
   - flask
+  - pytest
+  - coverage
 prefix: /home/ranr/Projects/flask_tutorial/.conda
